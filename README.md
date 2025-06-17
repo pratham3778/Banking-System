@@ -37,14 +37,13 @@ This is a full-stack **Banking System** project built using **Java** and **Sprin
 - Maven
 - MySQL
 
-### Steps:
+## 📬 Sample API Endpoints
 
-```bash
-git clone https://github.com/pratham3778/Banking-System.git
-cd Banking-System
-mvn clean install
-mvn spring-boot:run
+| Method | Endpoint                 | Description              |
+|--------|--------------------------|--------------------------|
+| POST   | `/api/user`              | Register a new user      |
+| POST   | `/api/user/deposit`      | Deposit money            |
+| POST   | `/api/user/withdraw`     | Withdraw money           |
+| POST   | `/api/user/transfer`     | Transfer funds           |
+| GET    | `/api/user/transactions` | View transaction history |
 
-
-
-### Visit: http://localhost:8080 
