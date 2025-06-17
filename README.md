@@ -29,3 +29,18 @@ This is a full-stack **Banking System** project built using **Java** and **Sprin
 | JavaMailSender | Email Notifications              |
 
 ---
+
+## ⚙️ How to Run
+
+### Prerequisites:
+- Java 17+
+- Maven
+- MySQL
+
+### Steps:
+
+```bash
+git clone https://github.com/pratham3778/Banking-System.git
+cd Banking-System
+mvn clean install
+mvn spring-boot:run
