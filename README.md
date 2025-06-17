@@ -44,3 +44,7 @@ git clone https://github.com/pratham3778/Banking-System.git
 cd Banking-System
 mvn clean install
 mvn spring-boot:run
+
+
+
+### Visit: http://localhost:8080 
