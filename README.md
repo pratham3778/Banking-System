@@ -39,11 +39,12 @@ This is a full-stack **Banking System** project built using **Java** and **Sprin
 
 ## 📬 Sample API Endpoints
 
-| Method | Endpoint                 | Description              |
-|--------|--------------------------|--------------------------|
-| POST   | `/api/user`              | Register a new user      |
-| POST   | `/api/user/deposit`      | Deposit money            |
-| POST   | `/api/user/withdraw`     | Withdraw money           |
-| POST   | `/api/user/transfer`     | Transfer funds           |
-| GET    | `/api/user/transactions` | View transaction history |
+| Method | Endpoint                            | Description                  |
+|--------|-------------------------------------|------------------------------|
+| POST   | `/api/user`                         | Register a new user          |
+| GET    | `/api/user/balanceEnquiry`          | Check account balance        |
+| POST   | `/api/user/debit`                   | Withdraw money from account  |
+| POST   | `/api/user/credit`                  | Deposit money to account     |
+| POST   | `/api/user/transfer`                | Transfer funds to another account |
+| POST   | `/api/user/nameEnquiry`             | Get account holder's name    |
 
