@@ -7,7 +7,7 @@ This is a full-stack **Banking System** project built using **Java** and **Sprin
 ## 📌 Features
 
 - ✅ User Registration and Management
-- 💰 Deposit, Withdrawal, and Fund Transfer
+- 💰 Credit, Debit and Fund Transfer
 - 📜 View Transaction History
 - 🔍 Account Enquiry & Balance Check
 - 📧 Email Notification Service
