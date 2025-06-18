@@ -1,6 +1,6 @@
 # 🏦 Banking System - Spring Boot Project
 
-This is a full-stack **Banking System** project built using **Java** and **Spring Boot**. The application provides core banking functionalities such as account management, fund transfers, balance enquiry, transaction history, and email notifications.
+This is a **Banking System** project built using **Java** and **Spring Boot**. The application provides core banking functionalities such as account management, fund transfers, balance enquiry, transaction history, and email notifications.
 
 ---
 
