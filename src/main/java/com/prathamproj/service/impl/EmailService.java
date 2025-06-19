@@ -5,5 +5,5 @@ import com.prathamproj.dto.EmailDetails;
 public interface EmailService {
 	
 	void sendEmailAlert(EmailDetails emailDetails);
-
+	void sendEmailWithAttachement(EmailDetails emailDetails);
 }

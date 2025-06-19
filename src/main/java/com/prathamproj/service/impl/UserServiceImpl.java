@@ -1,17 +1,27 @@
 package com.prathamproj.service.impl;
 
+import com.prathamproj.config.JwtTokenProvider;
 import com.prathamproj.dto.AccountInfo;
 import com.prathamproj.dto.BankResponse;
 import com.prathamproj.dto.CreditDebitRequest;
 import com.prathamproj.dto.EmailDetails;
 import com.prathamproj.dto.EnquiryRequest;
+import com.prathamproj.dto.LoginDto;
 import com.prathamproj.dto.TransactionDto;
 import com.prathamproj.dto.TransferRequest;
 import com.prathamproj.dto.UserRequest;
+import com.prathamproj.entity.Role;
 import com.prathamproj.entity.User;
 import com.prathamproj.repository.UserRepository;
 import com.prathamproj.utils.AccountUtils;
+
+import org.apache.coyote.http11.filters.VoidInputFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -28,6 +38,15 @@ public class UserServiceImpl implements UserService{
     
     @Autowired 
     TransactionService transactionService;
+    
+    @Autowired
+    PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    AuthenticationManager authenticationManager;
+    
+    @Autowired
+    JwtTokenProvider jwtTokenProvider;
 
     @Override
     public BankResponse createAccount(UserRequest userRequest) {
@@ -61,9 +80,11 @@ public class UserServiceImpl implements UserService{
                 .accountNumber(AccountUtils.generateAccountNumber())
                 .accountBalance(BigDecimal.ZERO)
                 .email(userRequest.getEmail())
+                .password(passwordEncoder.encode(userRequest.getPassword()))
                 .phoneNumber(userRequest.getPhoneNumber())
                 .alternativePhoneNumber(userRequest.getAlternativePhoneNumber())
                 .status("ACTIVE")
+                .role(Role.valueOf("ROLE_ADMIN"))
                 .build();
 
         User savedUser = userRepository.save(newUser);
@@ -79,7 +100,7 @@ public class UserServiceImpl implements UserService{
         emailService.sendEmailAlert(emailDetails);
         return BankResponse.builder()
                 .responseCode(AccountUtils.ACCOUNT_CREATION_SUCCESS)
-                .responseMessage(AccountUtils.ACCOUNT_EXISTS_MESSAGE)
+                .responseMessage(AccountUtils.ACCOUNT_CREATION_MESSAGE)
                 .accountInfo(AccountInfo.builder()
                         .accountBalance(savedUser.getAccountBalance())
                         .accountNumber(savedUser.getAccountNumber())
@@ -89,6 +110,36 @@ public class UserServiceImpl implements UserService{
 
 
     }
+    
+    
+    @Override
+    public BankResponse login(LoginDto loginDto) {
+        // Authenticate user credentials
+        Authentication authentication = authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword())
+        );
+
+        // ✅ Set authentication in security context
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        // Generate JWT token
+        String token = jwtTokenProvider.generateToken(authentication);
+
+        // Send email alert
+        EmailDetails loginAlert = EmailDetails.builder()
+            .subject("You're Logged in!")
+            .recipient(loginDto.getEmail())
+            .messageBody("You Logged into your account. If you did not initiate this request, please contact your bank.")
+            .build();
+        emailService.sendEmailAlert(loginAlert);
+
+        // Return response with token
+        return BankResponse.builder()
+            .responseCode("Login Success")
+            .responseMessage(jwtTokenProvider.generateToken(authentication))
+            .build();
+    }
+
 
 	@Override
 	public BankResponse balanceEnquiry(EnquiryRequest request) {
@@ -275,4 +326,5 @@ public class UserServiceImpl implements UserService{
 				.build();
 		
 	}
+	
 }

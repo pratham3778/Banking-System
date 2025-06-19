@@ -29,6 +29,9 @@ public class UserRequest {
 
     @Schema(name = "Email Address")
     private String email;
+    
+    @Schema(name = "Password")
+    private String password;
 
     @Schema(name = "Primary Phone Number")
     private String phoneNumber;

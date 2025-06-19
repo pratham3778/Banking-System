@@ -1,5 +1,6 @@
 package com.prathamproj.controller;
 
+import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 import com.prathamproj.dto.*;
 import com.prathamproj.service.impl.UserService;
 
@@ -29,6 +30,11 @@ public class UserController {
     @PostMapping
     public BankResponse createAccount(@RequestBody UserRequest userRequest){
         return userService.createAccount(userRequest);
+    }
+    
+    @PostMapping("/login")
+    public BankResponse login(@RequestBody LoginDto loginDto) {
+    	return userService.login(loginDto);
     }
 
     @Operation(
