@@ -59,6 +59,7 @@ When a user generates a statement, a **PDF is created and sent to their register
 | POST   | `/api/user/credit`                  | Deposit money to account     |
 | POST   | `/api/user/transfer`                | Transfer funds to another account |
 | POST   | `/api/user/nameEnquiry`             | Get account holder's name    |
+| GET    | `/bankStatement`            | Generate PDF bank statement & send via email |
 
 ---
 
