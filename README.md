@@ -14,7 +14,6 @@ A secure and extensible banking system built with **Java**, **Spring Boot** and 
 - 🧾 Bank Statement Generation as PDF
 - 📧 Email Sending with Statements
 - 🛡️ Role-based Access Control (via Spring Security)
-- 📦 Clean Architecture with Service & Repository Layers
 
 ---
 
