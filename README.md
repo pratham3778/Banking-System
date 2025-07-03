@@ -1,4 +1,4 @@
-# 💳 Banking System API
+# 💳 Banking System API with Spring Boot
 
 A secure and extensible banking system built with **Java**, **Spring Boot** and **MySQL**. It provides RESTful APIs for user management, account transactions, and statement generation with email integration.
 
